@@ -36,6 +36,7 @@ namespace Neft.Aggregation
             var data = new List<Bills>();
             var headers = Bills.GetExcelColumnHeaders();
             Console.WriteLine("Starting Fetching Data ....");
+
             foreach (var item in files)
             {
                 Console.WriteLine($"Fetching Data From {item}");
