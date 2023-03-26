@@ -1,0 +1,1 @@
+﻿https://codebeautify.org/minify-html
