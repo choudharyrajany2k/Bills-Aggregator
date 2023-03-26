@@ -1,14 +1,13 @@
 ﻿using System.Net.Mail;
-using VSR.ReceiptGenerator;
 
-namespace VSR.SendEmail
+namespace VSR.ReceiptGenerator
 {
     public class GmailSendMail : IGmailSendMail
     {
         //public const string Email = "office.vssafoa@gmail.com";
         public const string Email = "choudharyrajany2k@gmail.com";
         public const string password = "awtgsjjrgprfdahq";
-        public void MailSendGmail(string month,string year)
+        public void MailSendGmail(string month, string year)
         {
             try
             {
@@ -28,9 +27,9 @@ namespace VSR.SendEmail
                     Body = emailBody,
                     From = from,
                     IsBodyHtml = true,
-                    BodyEncoding=System.Text.Encoding.Unicode,
-                    HeadersEncoding=System.Text.Encoding.Unicode,
-                    SubjectEncoding=System.Text.Encoding.Unicode,
+                    BodyEncoding = System.Text.Encoding.Unicode,
+                    HeadersEncoding = System.Text.Encoding.Unicode,
+                    SubjectEncoding = System.Text.Encoding.Unicode,
                 };
                 mailmsg.To.Add(to);
 
