@@ -13,20 +13,20 @@
 
                 <div style='text-align: center;'>
                     <p>
-                        No:O4460
+                        No:{flatNumber}{date_of_transaction_MMDDYYYY}
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <b><u>MAINTENECE RECEIPT</u></b>
+                        <b><u>{Purpose} RECEIPT</u></b>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        date : <span>10-May-2023</span>
+                        date : <span>{Receipt_Isssue_Date}</span>
                     </p>
                 </div>
             </div>
             <div>
-                Received with Thanks from <b>Flat Number B401</b> By <b>Online</b> with <b> transaction Id 12342 </b>
-                Dated <b>12-Dec-2023</b> Rupees Two Thousand and Eight hundred only Full Payment for <b> APR-2023 </b>
+                Received with Thanks from <b>Flat Number {flatNumber}</b> By <b>{mode_of_transaction}</b> with <b> transaction Id {transactionId} </b>
+                Dated <b>{date_of_transaction_MM-DD-YYYY}</b> Rupees {amount_in_words} only Full Payment for <b> {month}-{year} </b>
             </div>
 
-            <span style='border: 1px solid black'><b>Rs. 2800</b></span>
+            <span style='border: 1px solid black'><b>Rs. {amount}</b></span>
 
             <div style='text-align:right;'>
                 For VS SAI ASHRAYA FLAT OWNERS ASSOCIATION

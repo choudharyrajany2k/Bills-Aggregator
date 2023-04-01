@@ -2,6 +2,8 @@
 {
     public interface IGmailSendMail
     {
-        public void MailSendGmail(string month, string year);
+        public void MailSendGmail(string flatNumber, string month, string year, string amount, string dateOfTransaction, string transactionId,
+            ModeOfTransaction modeOfTransaction = ModeOfTransaction.Online,
+            PurposeOfTransaction purposeOfTranaction = PurposeOfTransaction.Maintenance);
     }
 }
