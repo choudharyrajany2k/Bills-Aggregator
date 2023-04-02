@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using VSR.ReceiptGenerator;
 
 namespace VSR.ReceiptGenerator.Controllers
 {
@@ -18,9 +17,9 @@ namespace VSR.ReceiptGenerator.Controllers
         }
 
         [HttpPost(Name = "Send receipt Mail")]
-        public IActionResult Get(Receipt receipt)
+        public IActionResult Get(string to_email, Receipt receipt)
         {
-            _gmailsender.MailSendGmail(receipt.flatNumber, receipt.month, receipt.year, receipt.amount, 
+            _gmailsender.MailSendGmail(to_email,receipt.flatNumber, receipt.month, receipt.year, receipt.amount, 
                 receipt.dateOfTransaction.ToString(), receipt.transactionId, receipt.modeOfTransaction, receipt.purposeOfTranaction);
             return StatusCode(200);
         }

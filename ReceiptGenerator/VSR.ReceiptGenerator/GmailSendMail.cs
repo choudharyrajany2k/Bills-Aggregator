@@ -20,9 +20,9 @@ namespace VSR.ReceiptGenerator
     public class GmailSendMail : IGmailSendMail
     {
         //public const string Email = "office.vssafoa@gmail.com";
-        public const string Email = "choudharyrajany2k@gmail.com";
-        public const string password = "awtgsjjrgprfdahq";
-        public void MailSendGmail(string flatNumber, string month, string year, string amount, string dateOfTransaction, string transactionId,
+        public const string from_Email = "office.vssafoa@gmail.com";
+        public const string password = "uvqnxwxcwzklamzf";
+        public void MailSendGmail(string to_email,string flatNumber, string month, string year, string amount, string dateOfTransaction, string transactionId,
             ModeOfTransaction modeOfTransaction = ModeOfTransaction.Online,
             PurposeOfTransaction purposeOfTranaction = PurposeOfTransaction.Maintenance)
         {
@@ -32,11 +32,11 @@ namespace VSR.ReceiptGenerator
                 {
                     Port = 587, // TLS
                     //Port = 465, // SSl
-                    Credentials = new System.Net.NetworkCredential(Email, password),
+                    Credentials = new System.Net.NetworkCredential(from_Email, password),
                     EnableSsl = true,
                 };
-                MailAddress from = new MailAddress(Email);
-                MailAddress to = new MailAddress(Email);
+                MailAddress from = new MailAddress(from_Email);
+                MailAddress to = new MailAddress(to_email);
                 string emailBody = FillBodyTemplate(flatNumber, month, year, amount, dateOfTransaction, transactionId, modeOfTransaction, purposeOfTranaction);
                 MailMessage mailmsg = new()
                 {
@@ -49,6 +49,7 @@ namespace VSR.ReceiptGenerator
                     SubjectEncoding = System.Text.Encoding.Unicode,
                 };
                 mailmsg.To.Add(to);
+                mailmsg.CC.Add(from);
                 AlternateView view = ContentToAlternateView(emailBody);
                 mailmsg.AlternateViews.Add(view);
                 smtp.Send(mailmsg);
@@ -108,12 +109,14 @@ namespace VSR.ReceiptGenerator
             string emailBody = EmailBodyGenerator.GetEmailBody();
             var isParsedBody = DateTime.TryParse(dateOfTransaction, out DateTime _dateOfTransaction);
             _dateOfTransaction = isParsedBody ? _dateOfTransaction : DateTime.MinValue;
-            var isParsedNo = DateTime.TryParseExact(dateOfTransaction, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime _dateOfTransactionNo);
-            _dateOfTransactionNo = isParsedNo ? _dateOfTransactionNo : DateTime.MinValue;
+            var _dateOfTransactionNo = _dateOfTransaction.ToString("dd-MM-yyyy HH:mm:ss")
+                .Replace("-","")
+                .Replace(":","")
+                .Replace(" ","");
             var amountInWords = NumberToWord.ConvertWholeNumber(amount);
-            var receipt_isssue_date = DateTime.Now.Date.ToString();
+            var receipt_isssue_date = DateTime.Now.Date.ToString("dd-MM-yyyy");
             string filledEmailBody = emailBody.Replace("{flatNumber}", flatNumber)
-                .Replace("{date_of_transaction_MMDDYYYY}", _dateOfTransactionNo.ToString("ddMMyyyy"))
+                .Replace("{date_of_transaction_MMDDYYYY}", _dateOfTransactionNo)
                 .Replace("{Purpose}", purposeOfTranaction.ToString())
                 .Replace("{mode_of_transaction}", modeOfTransaction.ToString())
                 .Replace("{transactionId}", transactionId ?? "XXXXXXXXXX")
