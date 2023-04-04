@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using System.Net.Mime;
 using System.Text.RegularExpressions;
 
@@ -20,8 +19,8 @@ namespace VSR.ReceiptGenerator
     public class GmailSendMail : IGmailSendMail
     {
         //public const string Email = "office.vssafoa@gmail.com";
-        public const string from_Email = "office.vssafoa@gmail.com";
-        public const string password = "uvqnxwxcwzklamzf";
+        public const string from_Email = "";
+        public const string password = "";
         public void MailSendGmail(string to_email,string flatNumber, string month, string year, string amount, string dateOfTransaction, string transactionId,
             ModeOfTransaction modeOfTransaction = ModeOfTransaction.Online,
             PurposeOfTransaction purposeOfTranaction = PurposeOfTransaction.Maintenance)
